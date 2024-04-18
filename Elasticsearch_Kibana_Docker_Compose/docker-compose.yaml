@@ -1,0 +1,31 @@
+# Use root/example as user/password credentials
+version: "3.1"
+
+services:
+  elastic_search:
+    image: elasticsearch:$ELASTIC_VERSION
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+      - xpack.security.enabled=$ELASTIC_SECURITY
+    # volumes:
+    #   - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    mem_limit: 3g
+  kibana:
+    image: kibana:$ELASTIC_VERSION
+    restart: always
+    ports:
+      - 5601:5601
+    # volumes:
+    #   - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    environment:
+      - ELASTICSEARCH_HOSTS=["http://test-elastic_search-1:9200"]
+      - ELASTICSEARCH_PASSWORD=$ELASTIC_PASSWORD
+      - ELASTICSEARCH_USERNAME=elastic
+
+
+# docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:8.5.0
