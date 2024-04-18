@@ -23,7 +23,7 @@ services:
     # volumes:
     #   - ./kibana.yml:/usr/share/kibana/config/kibana.yml
     environment:
-      - ELASTICSEARCH_HOSTS=["http://test-elastic_search-1:9200"]
+      - ELASTICSEARCH_HOSTS=["http://elk_stack-elastic_search-1:9200"]
       - ELASTICSEARCH_PASSWORD=$ELASTIC_PASSWORD
       - ELASTICSEARCH_USERNAME=elastic
 

@@ -1,0 +1,1 @@
+docker-compose -f docker-compose.yaml - env-file .env -p elk_stack up
